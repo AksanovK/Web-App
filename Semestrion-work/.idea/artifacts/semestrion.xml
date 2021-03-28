@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="semestrion">
+    <output-path>$PROJECT_DIR$/out/artifacts/semestrion</output-path>
+    <root id="archive" name="semestrion.war" />
+  </artifact>
+</component>
