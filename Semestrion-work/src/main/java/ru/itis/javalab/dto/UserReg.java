@@ -9,6 +9,8 @@ import ru.itis.javalab.validation.ValidName;
 import ru.itis.javalab.validation.ValidPassword;
 
 import javax.validation.constraints.Email;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -23,5 +25,24 @@ public class UserReg {
     private String email;
     @ValidPassword(message = "{errors.invalid.password}")
     private String password;
+
+
+    public static UserReg convert(User user) {
+        if (user == null) {
+            return null;
+        }
+        return UserReg.builder()
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .build();
+    }
+
+    public static List<UserReg> from(List<User> users) {
+        return users.stream()
+                .map(UserReg::convert)
+                .collect(Collectors.toList());
+    }
 
 }

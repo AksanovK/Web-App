@@ -3,9 +3,6 @@ package ru.itis.javalab.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.itis.javalab.dto.UserReg;
@@ -45,20 +42,6 @@ public class SignUpServiceImpl implements SignUpService {
     @Value("${spring.mail.username}")
     private String from;
 
-    @Override
-    public void signUp(User user) {
-        User newUser = User.builder()
-                .email(user.getEmail())
-                .password(passwordEncoder.encode(user.getPassword()))
-                .confirmCode(UUID.randomUUID().toString())
-                .state(User.Status.UNCONFIRMED)
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .build();
-        usersRepository.save(newUser);
-        String confirmMail = mailsGenerator.getMailForConfirm(serverUrl, newUser.getConfirmCode());
-        emailUtil.sendMail(newUser.getEmail(), "Reg", from, confirmMail);
-    }
 
     @Override
     public void signUp(UserReg user) {
@@ -82,7 +65,7 @@ public class SignUpServiceImpl implements SignUpService {
 
     @Override
     public void updateStatus(String code) {
-        usersRepository.unConfirming(code);
+        usersRepository.updateStatus(code);
     }
 
 

@@ -9,7 +9,6 @@ import java.util.Optional;
 
 @Component
 public interface SignUpService {
-    void signUp(User user);
     void signUp(UserReg user);
     Optional<User> findFirstByConfirmCode(String code);
     void updateStatus(String code);

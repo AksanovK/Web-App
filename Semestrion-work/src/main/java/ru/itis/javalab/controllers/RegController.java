@@ -7,9 +7,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.itis.javalab.dto.UserReg;
 import ru.itis.javalab.services.SignUpService;
+
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
-
+@Transactional
 @Controller
 public class RegController {
 
@@ -29,12 +31,12 @@ public class RegController {
     }
 
     @RequestMapping(value="/confirm/{code}", method=RequestMethod.GET)
-    public String verificationToken(@PathVariable String code){
+    public String verificationToken(@PathVariable("code") String code){
         if (!signUpService.findFirstByConfirmCode(code).isPresent()) {
             return "registration";
         } else {
             signUpService.updateStatus(code);
-            return "redirect:/users";
+            return "redirect:/start";
         }
     }
 

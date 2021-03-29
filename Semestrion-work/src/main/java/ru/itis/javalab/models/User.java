@@ -1,10 +1,10 @@
 package ru.itis.javalab.models;
 
 import lombok.*;
-import ru.itis.javalab.validation.ValidName;
-import ru.itis.javalab.validation.ValidPassword;
 
-import javax.validation.constraints.Email;
+import javax.persistence.*;
+
+import static javax.persistence.EnumType.STRING;
 
 /**
  * 08.10.2020
@@ -13,36 +13,27 @@ import javax.validation.constraints.Email;
  * @author Sidikov Marsel (First Software Engineering Platform)
  * @version v1.0
  */
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 @Builder
-@EqualsAndHashCode
-@ToString
 @AllArgsConstructor
+@Entity
+@Table(name = "account")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //@ValidName(message = "{errors.incorrect.firstName}")
     private String firstName;
-    //@ValidName(message = "{errors.incorrect.lastName}")
     private String lastName;
-    //@Email(message = "{errors.incorrect.email}")
     private String email;
-    //@ValidPassword(message = "{errors.invalid.password}")
     private String password;
     private String confirmCode;
+
+    @Enumerated(EnumType.STRING)
     private Status state;
+
     public enum Status {
         CONFIRMED, UNCONFIRMED;
     }
 
-    public User() {
-
-    }
-
-    /*public User(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }*/
 }

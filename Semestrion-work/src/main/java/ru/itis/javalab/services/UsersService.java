@@ -1,8 +1,7 @@
 package ru.itis.javalab.services;
 
 import org.springframework.stereotype.Component;
-import ru.itis.javalab.dto.UserDto;
-import ru.itis.javalab.dto.UserDto1;
+import ru.itis.javalab.dto.UserReg;
 import ru.itis.javalab.models.User;
 
 import java.util.List;
@@ -16,12 +15,8 @@ import java.util.List;
  */
 @Component
 public interface UsersService {
-    List<UserDto> getAllUsers();
-    List<UserDto> getAllUsers(int page, int size);
-    void addUser(UserDto userDto);
-    void addUser(UserDto1 userDto1);
+    List<UserReg> getAllUsers();
+    void addUser(UserReg userDto1);
     void addUser(User user);
-    UserDto getUser(Long userId);
-    UserDto1 findFirstByEmail(String email);
-    User getFirstByEmail(String email);
+    UserReg getUser(Long userId);
 }
