@@ -50,6 +50,18 @@ public class UsersServiceImpl implements UsersService {
         .build());
     }
 
+
+    @Override
+    public void banAll() {
+        List<User> users = usersRepository.findAll();
+        for (User user : users) {
+            if (!user.isAdmin()) {
+                user.setCondition(User.State.BANNED);
+                usersRepository.save(user);
+            }
+        }
+    }
+
     @Override
     public UserReg getUser(Long userId) {
         return UserReg.convert(usersRepository.findById(userId).orElse(null));

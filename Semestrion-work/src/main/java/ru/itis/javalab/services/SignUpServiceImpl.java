@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import ru.itis.javalab.dto.UserReg;
 import ru.itis.javalab.models.User;
 import ru.itis.javalab.repositories.UsersRepository;
@@ -52,6 +53,8 @@ public class SignUpServiceImpl implements SignUpService {
                 .state(User.Status.UNCONFIRMED)
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
+                .role(User.Role.USER)
+                .condition(User.State.ACTIVE)
                 .build();
         usersRepository.save(newUser);
         String confirmMail = mailsGenerator.getMailForConfirm(serverUrl, newUser.getConfirmCode());

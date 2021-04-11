@@ -20,6 +20,7 @@
 <@spring.bind "userReg"/>
 <@spring.showErrors '*', 'errors' />
 <form method="post" action="/registration">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <label><@spring.message 'sign_up_page.registration.firstName'/></label>
     <@spring.formInput "userReg.firstName"/>
     <@spring.showErrors "<br>" "error"/>

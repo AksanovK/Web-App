@@ -15,6 +15,7 @@ import java.util.List;
  */
 @Component
 public interface UsersService {
+    void banAll();
     List<UserReg> getAllUsers();
     void addUser(UserReg userDto1);
     void addUser(User user);

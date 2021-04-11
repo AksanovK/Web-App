@@ -21,9 +21,6 @@ public class SignUpServiceFakeImpl implements SignUpService {
     @Autowired
     private MailsGenerator mailsGenerator;
 
-    @Autowired
-    private JavaMailSender mailSender;
-
 
     @Value("${server.url}")
     private String serverUrl;

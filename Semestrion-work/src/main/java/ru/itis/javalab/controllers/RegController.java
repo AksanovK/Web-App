@@ -36,7 +36,7 @@ public class RegController {
             return "registration";
         } else {
             signUpService.updateStatus(code);
-            return "redirect:/start";
+            return "redirect:/signIn";
         }
     }
 
